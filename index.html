@@ -1,0 +1,819 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>D3.js</title>
+
+		<meta name="description" content="Data-driven Documents">
+		<meta name="author" content="">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+                
+                <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+                <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+                <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+                <script>window.d3 || document.write('<script src="js/vendor/d3.v3.min.js"><\/script>')</script>
+                <script src="js/chart.js" charset="utf-8"></script>
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+                <style>
+                    ul.layouts li {
+                        margin:0;
+                        padding: 0;
+                        font-size:20px;
+                        height:25px;
+                    }
+                    </style>
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>D3.js</h1>
+					<h3>Data-Driven Documents</h3>
+					<p>
+                                            <small><a href="http://d3js.org/" target="_blank">http://d3js.org/</a></small>
+					</p>
+                                        <br>
+<!--                                        <h6>by Mike Bostock</h6>
+                                        <p>
+                                            <small><a href="https://github.com/mbostock" target="_blank">https://github.com/mbostock</a></small>
+                                        </p>-->
+				</section>
+
+                            <section>
+                                
+                                <h2>Examples</h2>
+                                
+                                <a href="http://bl.ocks.org/mbostock" target="_blak">http://bl.ocks.org/mbostock</a>
+                                
+                                <br> 
+                                <br> 
+                                
+                                <a href="http://www.mftransparency.org/microfinance-pricing/" target="_blak">http://www.mftransparency.org/microfinance-pricing/</a>
+                                
+                            </section>
+                            
+                            <section>
+                                <h2>Browser Support?</h2>
+                                <p>Any browser that supports SVG</p>
+                                <small>
+                                <a href='http://caniuse.com/#feat=svg' target='_blank'>http://caniuse.com/#feat=svg</a>
+                                </small>
+                            </section>
+                            
+                                <section>
+                                    <h2>D3.js</h2>
+                                    <h3>Selectors</h3>
+                                    <pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+//d3.js    
+d3.selectAll("p").style("color", "white");
+//jQuery
+$("p").css("color", "white");
+                                    </code></pre>
+                                </section>
+
+                                <section>
+                                    <h2>D3.js</h2>
+                                    <h3>Dynamic Properties</h3>
+                                    <pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+//dynamic properties
+d3.selectAll("p").style("color", function() {
+  return "hsl(" + Math.random() * 360 + ",100%,50%)";
+});
+//jQuery
+$("p").css("color", function() {
+  return "hsl(" + Math.random() * 360 + ",100%,50%)";
+});
+                                    </code></pre>
+                                    <a href="test1.html" target="_blank">test1.html</a>
+                                </section>
+                            
+                                <section>
+                                    <h2>D3.js</h2>
+                                    <h3>Events</h3>
+                                    <pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+//dynamic properties
+d3.selectAll("p").on("click", function(datum, index) { 
+        alert("Event fired on "+this+": "+d3.event.type );
+});
+
+//jQuery
+$("p").on("click", function(e) { 
+        alert("Event Fired on "+this+": "+e.type ); 
+});
+
+                                    </code></pre>
+
+                                    <a href="test2.html" target="_blank">test2.html</a><br><br>
+
+                                    Doc: <a href="https://github.com/mbostock/d3/wiki/Selections#on" target="_blank">https://github.com/mbostock/d3/wiki/Selections#on</a>
+                                </section>
+                            
+                            
+                            
+                            
+
+                                <section>
+                                    <h2>D3.js</h2>
+                                    <h3>Dynamic Properties based on bound Data</h3>
+                                    <pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+//dynamic properties
+d3.selectAll("p")
+    .data([4, 8, 15, 16, 23, 42])
+    .style("font-size", function(d) { return d + "px"; })
+    .text(function(d) { return "This p has font size " + d + "." });
+                                    </code></pre>
+                                    <a href="test1.html" target="_blank">test1.html</a>
+                                    <div class="test">
+                                        
+                                    </div>
+
+                                </section>
+                            
+                            <section>
+                                    <h2>D3 Selections</h3>
+                                    <div style='font-size:24px;'>
+                                    <p>A selection is an array of elements pulled from the current document.</p>
+                                    <br>
+                                    <p>After selecting elements, you apply operators to them to do stuff. These operators can get or set attributes, styles, properties, HTML and text content. </p>
+                                    <br>
+                                    <p> You can also join selections to data; this data is available to operators for data-driven transformations. In addition, joining to data produces enter and exit subselections, so that you may add or remove elements in response to changes in data.
+                                    </div>
+                                    <br>
+                                    <p>
+                                        <small>
+                                        <a href='https://github.com/mbostock/d3/wiki/Selections' target='_blank'>https://github.com/mbostock/d3/wiki/Selections</a>
+                                        </small>
+                                    </p>
+                            </section>
+                                <section>
+                                    <h2>D3.js</h2>
+                                    <h3>Add Elements</h3>
+                                    <pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+d3.select("body").selectAll("p")
+    .data([4, 8, 15, 16, 23, 42])
+  .enter().append("p")
+    .text(function(d) { return "I’m number " + d + "!"; });
+
+                                    </code></pre>
+
+                                    <a href="test2.html" target="_blank">test2.html</a>
+
+
+                                </section>
+                            
+                                <section>
+                                    <h2>D3.js</h2>
+                                    <h3>Update, Enter & Exit</h3>
+                                    <pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+// Update…
+var p = d3.select("body").selectAll("p")
+    .data([4, 8, 10, 20, 30])
+    .text(function(d) { return "I’m number " + d + "!"; });
+
+// Enter…
+p.enter().append("p")
+    .text(function(d) { return "I’m number " + d + "! Just entered."; });
+
+// Exit…
+p.exit().remove();
+                                    </code></pre>
+
+                                    <a href="test2.html" target="_blank">test2.html</a>
+
+
+                                </section>
+                                    
+                            <section>
+                            
+                            <pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+//Scatterplot data
+var data = [
+  {x: 10.0, y: 9.14},
+  {x:  8.0, y: 8.14},
+  {x: 13.0, y: 8.74},
+  {x:  9.0, y: 8.77},
+  {x: 11.0, y: 9.26},
+  {x: 14.0, y: 8.10},
+  {x:  6.0, y: 6.13},
+  {x:  4.0, y: 3.10},
+  {x: 12.0, y: 9.13},
+  {x:  7.0, y: 7.26},
+  {x:  5.0, y: 4.74},
+];
+                            </code></pre>
+                                
+                            </section>
+ 
+                            <section>
+    <h2>Full example & Key function</h2>   
+<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+
+    var data = [
+        {x: 10.0, y: 9.14},
+        {x:  8.0, y: 8.14},
+        {x: 13.0, y: 8.74},
+        {x:  9.0, y: 8.77},
+        {x: 11.0, y: 9.26},
+        {x: 14.0, y: 8.10},
+        {x:  6.0, y: 6.13},
+        {x:  4.0, y: 3.10},
+        {x: 12.0, y: 9.13},
+        {x:  7.0, y: 7.26},
+        {x:  5.0, y: 4.74},
+      ];
+
+    var margin = {top: 80, right: 80, bottom: 20, left: 80},
+      width = 540,
+      height = 380;
+
+    //creates the X scale
+    var x = d3.scale.linear()
+        .domain([0, 20])
+        .range([0, width - margin.left - margin.right]);
+        
+
+    //creates the Y scale
+    var y = d3.scale.linear()
+        .domain([0, 20])
+        .range([height - margin.top - margin.bottom, 0]);
+
+    //helper to draw X Axis
+    var xAxis = d3.svg.axis()
+        .scale(x)
+        .orient("bottom")
+        .tickPadding(8);
+
+    //helper to draw Y Axis
+    var yAxis = d3.svg.axis()
+        .scale(y)
+        .orient("left")
+        .tickPadding(8);
+
+    //Append SVG
+    var svg = d3.select("body").append("svg")
+              .attr("width", width)
+              .attr("height", height)
+              .attr("class", "dot chart")
+            .append("g")
+              .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+                ;
+
+    svg.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + y.range()[0] + ")")
+        .call(xAxis);
+
+    svg.append("g")
+        .attr("class", "y axis")
+        .call(yAxis);
+
+    //Append circles
+    svg.selectAll(".dot")
+              .data(data, function(d) { return d.x } ) //the data set
+            .enter().append("circle")
+              .attr("class", "dot")
+              .attr("cx", function(d) {return x(d.x); })
+              .attr("cy", function(d) {return y(d.y); })
+              .attr("r", 12);
+
+    //Update Circles
+    svg.selectAll(".dot")
+              .data(data) //the data set
+            .transition().duration(1000).delay(200)
+              .attr("class", "dot")
+              .attr("cx", function(d) {return x(d.x); })
+              .attr("cy", function(d) {return y(d.y); })
+              .attr("r", 12);
+
+
+
+</code></pre>
+<a href="test2.html" target="_blank">test2.html</a><br>
+<!--<a href="dot-chart.html">dot-chart.html</a>-->
+Example taken from: <a href="http://bost.ocks.org/mike/d3/workshop/"  target="_blank">http://bost.ocks.org/mike/d3/workshop/</a>
+    
+</section>
+       
+                            
+<section>
+    <div id="dot-chart">
+    </div>
+    Example taken from: <a href="http://bost.ocks.org/mike/d3/workshop/"  target="_blank">http://bost.ocks.org/mike/d3/workshop/</a>
+    <script>
+        
+    var data = [
+        {x: 10.0, y: 9.14},
+        {x:  8.0, y: 8.14},
+        {x: 13.0, y: 8.74},
+        {x:  9.0, y: 8.77},
+        {x: 11.0, y: 9.26},
+        {x: 14.0, y: 8.10},
+        {x:  6.0, y: 6.13},
+        {x:  4.0, y: 3.10},
+        {x: 12.0, y: 9.13},
+        {x:  7.0, y: 7.26},
+        {x:  5.0, y: 4.74},
+      ];
+
+    console.log("show dotChart()");
+
+      d3.select("#dot-chart").datum(data)
+        .call(dotChart( { width: 800, height: 600 } ));
+
+//      var selection = d3.select("#dot-chart").datum(data);
+//      var mydotChart = dotChart( { width: 800, height: 600 });
+//      mydotChart(selection);
+
+    </script>
+</section>
+                                                  
+                        <section>
+                            
+                                <h2>D3.js</h2>
+                                <h3>Transitions</h3>
+                                
+                                    For example, to fade the background of the page to black:
+                                    <pre><code data-trim contenteditable style="font-size: 18px; margin-top: 10px;">
+d3.select("body").transition()
+    .style("background-color", "black");
+                                    </code></pre>
+                                    Or, to resize circles in a symbol map with a staggered delay:
+                                    <pre><code data-trim contenteditable style="font-size: 18px; margin-top: 10px;">
+d3.selectAll("circle").transition()
+    .duration(750)
+    .delay(function(d, i) { return i * 10; })
+    .attr("r", function(d) { return Math.sqrt(d * scale); });    
+                                    </code></pre>                   
+
+                            
+                            </section>
+                        
+
+                            <section>
+                            
+                                <h2>D3.js</h2>
+                                <h3>Transitions</h3>
+                                <p  style="font-size: 20px;">D3 has many built-in interpolators to simplify the transitioning of arbitrary values. 
+                                    For instance, you can transition from the font string "500 12px sans-serif" to "300 42px sans-serif", 
+                                    and D3 will find the numbers embedded within the string, interpolating both font size and weight automatically.</p>       
+                                <ul>
+                                    <li>numbers</li>
+                                    <li>colors</li>
+                                    <li><a href="http://bl.ocks.org/mbostock/1345853" target='_blank'>geometric transforms</a></li>
+                                    <li>string embebed numbers (e.g., "96px")</li>
+                                </ul>
+                                <br>
+                                <br>
+                                <p style="text-align:left">                                
+                                    <small><a href="https://github.com/mbostock/d3/wiki/Transitions" target='_blank'>https://github.com/mbostock/d3/wiki/Transitions</a></small>
+                                    <br>
+                                    <small><a href="http://bost.ocks.org/mike/transition/" target='_blank'>http://bost.ocks.org/mike/transition/</a></small>
+                                </p>
+                            </section>
+                            
+                            <section>
+                            
+                                <h2>D3.js</h2>
+                                <h3>Your Own Interpolator</h3>
+                                <p>If you want to implement your own interpolator, you need a function that takes a single argument t ranging from 0 to 1. 
+                                    For t = 0, the interpolator returns the starting value; for t = 1, the interpolator returns the ending value; and for values in-between, the interpolator returns a blending value.
+                                    For example, to interpolate two numbers:
+                                </p>
+
+<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 10px;">
+function interpolateNumber(a, b) {
+  return function(t) {
+    return a + t * (b - a);
+  };
+}
+</code></pre>                   
+
+                                
+</section>
+                            
+                        <section>
+                            <h2>D3.js</h2>
+                            <h3>There is more stuff to help you</h3>
+                            <ul>
+                                <li>Log scales, power scales, quantized scales, ordinal scales ...</li>
+                                <li>Geographic projections and country map data.</li>
+                                <li>Drag and touch events, colour space functions, date formatting, array manipulation, ...</li>
+                                <li>Helper functions for different charts layouts: chord, histogram, hierarchy, pie, stack, tree, cluster, pack ...</li>
+                            </ul>
+                        </section>
+                            <section>
+                                <a href='http://bl.ocks.org/mbostock/3887235' target='_blank'><img src="img/pie.png" alt="pie"></a>
+                                <a href='http://bl.ocks.org/mbostock/1044242' target='_blank'><img src="img/bundle.png" alt="bundle"></a>
+                                <a href='http://bl.ocks.org/mbostock/4063530' target='_blank'><img src="img/pack.png" alt="pack"></a>
+                                <a href='#' target='_blank'><img src="img/diagonal.png" alt="diagonal"></a>
+                            </section>
+                        <section>
+                            <h2>D3.js</h2>
+                            <h3>Layouts</h3>
+
+                            <ul class='layouts'>
+<li>
+    <a class="internal present" href="https://github.com/mbostock/d3/wiki/Bundle-Layout">Bundle</a> - apply Holten's <em>hierarchical bundling algorithm</em> to edges.
+</li>
+<li>
+    <a class="internal present" href="https://github.com/mbostock/d3/wiki/Chord-Layout">Chord</a> - produce a chord diagram from a matrix of relationships.
+</li>
+<li>
+    <a class="internal present" href="https://github.com/mbostock/d3/wiki/Cluster-Layout">Cluster</a> - cluster entities into a dendrogram.
+</li>
+<li>
+    <a class="internal present" href="https://github.com/mbostock/d3/wiki/Force-Layout">Force</a> - position linked nodes using physical simulation.
+</li>
+<li>
+    <a class="internal present" href="https://github.com/mbostock/d3/wiki/Hierarchy-Layout">Hierarchy</a> - derive a custom hierarchical layout implementation.
+</li>
+<li>
+    <a class="internal present" href="https://github.com/mbostock/d3/wiki/Histogram-Layout">Histogram</a> - compute the distribution of data using quantized bins.
+</li>
+<li>
+    <a class="internal present" href="https://github.com/mbostock/d3/wiki/Pack-Layout">Pack</a> - produce a hierarchical layout using recursive circle-packing.
+</li>
+<li>
+    <a class="internal present" href="https://github.com/mbostock/d3/wiki/Partition-Layout">Partition</a> - recursively partition a node tree into a sunburst or icicle.
+</li>
+<li>
+    <a class="internal present" href="https://github.com/mbostock/d3/wiki/Pie-Layout">Pie</a> - compute the start and end angles for arcs in a pie or donut chart.
+</li>
+<li>
+    <a class="internal present" href="https://github.com/mbostock/d3/wiki/Stack-Layout">Stack</a> - compute the baseline for each series in a stacked bar or area chart.
+</li>
+<li>
+    <a class="internal present" href="https://github.com/mbostock/d3/wiki/Tree-Layout">Tree</a> - position a tree of nodes tidily.
+</li>
+<li>
+    <a class="internal present" href="https://github.com/mbostock/d3/wiki/Treemap-Layout">Treemap</a> - use recursive spatial subdivision to display a tree of nodes.
+</li>
+</ul>
+                            <br>
+                            <br>
+                    <small><a href="https://github.com/mbostock/d3/wiki/Layouts" target='_blank'>https://github.com/mbostock/d3/wiki/Layouts</a></small>
+                        </section>
+                            
+                        <section>
+                            <h2>SVG</h2>
+                            <p style='font-size:24px;'>Scalable Vector Graphics (SVG) is an XML-based vector image format for two-dimensional graphics with 
+                                support for interactivity and animation. The SVG specification is an open standard developed by the 
+                                World Wide Web Consortium (W3C) since 1999. SVG images and their behaviors are defined in XML text files.
+                            </p>
+                            <br>
+                            <br>
+                            <h3>Resources</h3>
+                            <ul>
+                                <li><a href="https://github.com/mbostock/d3/wiki/SVG-Shapes">D3 API Reference</a></li>
+                                <li><a href="http://www.w3.org/TR/SVG/">SVG Spec</a></li>
+                                <li><a href="https://developer.mozilla.org/en/SVG">MDN</a></li>
+                            </ul>
+                        </section>
+                            
+                        <section>
+                            <h2>D3 Resources</h2>
+                            <ul>
+                                <li><a href="https://github.com/mbostock/d3/wiki/Gallery">D3 examples gallery</a></li>
+                                <li><a href="https://github.com/mbostock/d3/wiki/API-Reference">D3 API Reference</a></li>
+                                <li><a href="https://github.com/mbostock/d3/wiki">D3 Wiki</a></li>
+                                <li><a href="https://groups.google.com/group/d3-js">D3 Group</a></li>
+                                <li><a href="http://stackoverflow.com/questions/tagged/d3.js">D3 Stack Overflow</a></li>
+                            </ul>
+                        </section>
+                            
+                    <section>
+                        <h3>Libraries built on top of D3.js</h3>
+                        <ul>
+                            <li><a href="http://nvd3.org/">http://nvd3.org/</a></li>
+                            <li><a href="http://dc-js.github.io/dc.js/">http://dc-js.github.io/dc.js/</a></li>
+                            <li><a href="http://c3js.org/">http://c3js.org/</a></li>
+                            <li><a href="http://dimplejs.org/">http://dimplejs.org/ Powered by d3</a> </li>
+                            <li><a href="http://square.github.io/cubism/">http://square.github.io/cubism/ d3 'plugin'</a></li>
+                            <li><a href="http://code.shutterstock.com/rickshaw/">http://code.shutterstock.com/rickshaw/ built on d3</a></li>
+                            <!--https://www.polychart.com/ not d3js? -->
+                            <li><a href="http://tenxer.github.io/xcharts/">http://tenxer.github.io/xcharts/</a></li>
+                            <li><a href="http://tributary.io/inlet/2958568/">http://tributary.io/inlet/2958568/ (tributary.io)</a></li>
+                        </ul>
+                    </section>
+                            
+                    <section>
+                        <h3>To build your own graph library start here:</h3>
+                        <ul>
+                            <li><a href="http://bost.ocks.org/mike/chart/">Towards Reusable Charts</a></li>
+                        </ul>
+                    </section>
+                            
+<!--                    <section>
+                        <h3>Selections</h3>
+
+                        For advanced usage, D3 has a few additional operators for custom control flow.
+
+                        # selection.each(function)
+
+                        Invokes the specified function for each element in the current selection, passing in the current datum d and index i, with the this context of the current DOM element. This operator is used internally by nearly every other operator, and can be used to invoke arbitrary code for each selected element
+
+                    </section>
+                            
+                    <section>
+                        <h3>selection.call()</h3>
+                        <pre><code data-trim contenteditable style="font-size: 18px; margin-top: 10px;">
+                        selection.call(myChart);
+                        </code></pre>
+                        <ul>
+                            <li><a href="https://github.com/mbostock/d3/wiki/Selections#call">https://github.com/mbostock/d3/wiki/Selections#call</a></li>
+                            
+                        </ul>
+                    </section>-->
+
+                    <section>
+                        <pre><code data-trim contenteditable style="font-size: 18px; margin-top: 10px;">
+function chart() {
+  // generate chart here
+}
+                        </code></pre>
+                    </section>
+                    <section>
+                        <pre><code data-trim contenteditable style="font-size: 18px; margin-top: 10px;">
+function chart(width, height) {
+  // generate chart here, using `width` and `height`
+}
+                        </code></pre>
+                    </section>
+                    <section>
+                        <pre><code data-trim contenteditable style="font-size: 18px; margin-top: 10px;">
+function chart(config) {
+  // generate chart here, using `config.width` and `config.height`
+}
+                        </code></pre>
+                    </section>
+                    <section>
+                        <pre><code data-trim contenteditable style="font-size: 18px; margin-top: 10px;">
+function chart(config) {
+    
+    //do stuff
+
+  return function(selection) {
+    // generate chart here, using `config.width` and `config.height`
+  };
+
+}
+
+var myChart = chart({width: 720, height: 80});
+
+d3.selectAll("p").data(data).call(myChart); 
+//or
+myChart( d3.selectAll("p").data(data) ); 
+
+                        </code></pre>
+                    </section>
+                    <section>
+                        <pre><code data-trim contenteditable style="font-size: 18px; margin-top: 10px;">
+function chart() {
+  var width = 720, // default width
+      height = 80; // default height
+
+  function my(selection) {
+    // generate chart here, using `width` and `height`
+  }
+
+  my.width = function(value) {
+    if (!arguments.length) return width;
+    width = value;
+    return my;
+  };
+
+  my.height = function(value) {
+    if (!arguments.length) return height;
+    height = value;
+    return my;
+  };
+
+  return my;
+}
+                        </code></pre>
+                    </section>
+                            
+<section>
+    <div id="dot-chart2">
+    </div>
+    <script>
+    var data = [
+        {x: 10.0, y: 9.14},
+        {x:  8.0, y: 8.14},
+        {x: 13.0, y: 8.74},
+        {x:  9.0, y: 8.77},
+        {x: 11.0, y: 9.26},
+        {x: 14.0, y: 8.10},
+        {x:  6.0, y: 6.13},
+        {x:  4.0, y: 3.10},
+        {x: 12.0, y: 9.13},
+        {x:  7.0, y: 7.26},
+        {x:  5.0, y: 4.74},
+      ];
+
+    console.log("show dotChart()");
+
+      var mydotChart = dotChart( { width: 800, height: 600 });
+      
+//        mydotChart( d3.select("#dot-chart2").datum(data) );
+      
+      d3.select("#dot-chart2").datum(data).call(mydotChart) ;
+
+    </script>
+        
+
+</section>
+<section>
+    <pre><code data-trim contenteditable style="font-size: 18px; margin-top: 10px;">
+    var data = [
+        {x: 10.0, y: 9.14},
+        {x:  8.0, y: 8.14},
+        {x: 13.0, y: 8.74},
+        {x:  9.0, y: 8.77},
+        {x: 11.0, y: 9.26},
+        {x: 14.0, y: 8.10},
+        {x:  6.0, y: 6.13},
+        {x:  4.0, y: 3.10},
+        {x: 12.0, y: 9.13},
+        {x:  7.0, y: 7.26},
+        {x:  5.0, y: 4.74},
+      ];
+
+      var mydotChart = dotChart( { width: 800, height: 600 });
+
+      mydotChart( d3.select("#dot-chart2").datum(data) );
+      //or 
+     d3.select("#dot-chart2").datum(data).call(mydotChart);
+
+    </code></pre>
+        
+
+</section>
+                            
+<section>
+    
+    <pre><code data-trim contenteditable style="font-size: 18px; margin-top: 10px;">
+    
+function dotChart(config) {
+    
+  var margin = {
+                    top: config.margin_top || 80, 
+                    right: config.margin_right || 80, 
+                    bottom: config.margin_bottom || 200, 
+                    left: config.margin_left || 80
+                },
+                width = config.width || 1280,
+                height = config.height || 720;
+
+  var x = d3.scale.linear()
+      .range([0, width - margin.left - margin.right]);
+
+  var y = d3.scale.linear()
+      .range([height - margin.top - margin.bottom, 0]);
+
+  var xAxis = d3.svg.axis()
+      .scale(x)
+      .orient("bottom")
+      .tickPadding(8);
+
+  var yAxis = d3.svg.axis()
+      .scale(y)
+      .orient("left")
+      .tickPadding(8);
+
+  function chart(selection) {
+    selection.each(function(d) {
+
+      pad(x.domain(d3.extent(d, xValue)), 40);
+      pad(y.domain(d3.extent(d, yValue)), 40);
+
+      var svg = d3.select(this).append("svg")
+          .attr("width", width)
+          .attr("height", height)
+          .attr("class", "dot chart")
+        .append("g")
+          .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+      svg.selectAll(".dot")
+          .data(d)
+        .enter().append("circle")
+          .attr("class", "dot")
+          .attr("cx", function(d) { return x(d.x); })
+          .attr("cy", function(d) { return y(d.y); })
+          .attr("r", 12);
+
+      svg.append("g")
+          .attr("class", "x axis")
+          .attr("transform", "translate(0," + y.range()[0] + ")")
+          .call(xAxis);
+
+      svg.append("g")
+          .attr("class", "y axis")
+          .call(yAxis);
+
+    });
+  }
+
+  function pad(scale, k) {
+    var range = scale.range();
+    if (range[0] > range[1]) k *= -1;
+    return scale.domain([range[0] - k, range[1] + k].map(scale.invert)).nice();
+  }
+
+  function xValue(d) {
+    return d.x;
+  }
+
+  function yValue(d) {
+    return d.y;
+  }
+
+  return chart;
+}
+      
+
+    </code></pre>
+        
+
+</section>
+                            
+                    <section>
+                            <h1>THE END</h1>
+                            <p>You can download this presentation here</p>
+                            <p>
+                                <a href="https://github.com/cminatti/d3js.git" title="Download this presentation here">https://github.com/cminatti/d3js.git</a>
+                            </p>
+                    </section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme || 'sky', // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+                        
+                        Reveal.addEventListener( 'something', function() {
+                                console.log('"something" happened!');
+                        } );
+
+		</script>
+
+	</body>
+</html>
